@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We're Hiring: Mechanical Design Engineer — Embedded TechLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="shortcut icon" href="./logo.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =====================================================
+     EMBEDDED TECHLAB — Mechanical Design Engineer posting
+     Token system
+     ===================================================== */
+  :root{
+    --navy:#100F73;
+    --navy-deep:#0A0950;
+    --orange:#EB5634;
+    --lime:#5FD400;
+    --ink:#15151C;
+    --ink-soft:#4B4B57;
+    --paper:#FFFFFF;
+    --paper-soft:#F5F6EF;
+    --line:#E3E3DA;
+    --display: 'Anton', sans-serif;
+    --body: 'Poppins', -apple-system, Segoe UI, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  ::selection{ background:var(--lime); color:var(--navy-deep); }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+
+  /* ---------- dot grid utility (callback to brand poster) ---------- */
+  .dotgrid{
+    background-image:radial-gradient(var(--navy) 1.6px, transparent 1.6px);
+    background-size:16px 16px;
+    opacity:.18;
+  }
+  .dotgrid.on-dark{
+    background-image:radial-gradient(rgba(255,255,255,.55) 1.6px, transparent 1.6px);
+    opacity:.5;
+  }
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand-mark{ width:34px; height:34px; flex:none; }
+  .brand-name{
+    font-family:var(--mono); font-weight:700; font-size:13px;
+    letter-spacing:.04em; color:var(--navy); line-height:1.1;
+  }
+  .brand-name span{ display:block; font-size:9px; color:var(--ink-soft); font-weight:500; letter-spacing:.08em; }
+
+  .nav-links{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    font-size:14px; font-weight:600; text-decoration:none; color:var(--ink);
+    position:relative; padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
+    background:var(--orange); transition:right .25s ease;
+  }
+  .nav-links a:hover::after{ right:0; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--body); font-weight:700; font-size:14px;
+    padding:11px 20px; border-radius:999px; text-decoration:none;
+    border:2px solid transparent; cursor:pointer; white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:focus-visible{ outline:3px solid var(--lime); outline-offset:2px; }
+  .btn-primary{ background:var(--orange); color:#fff; box-shadow:0 6px 0 var(--navy-deep); }
+  .btn-primary:hover{ box-shadow:0 8px 0 var(--navy-deep); }
+  .btn-ghost-light{ background:transparent; border-color:#fff; color:#fff; }
+  .btn-ghost-light:hover{ background:#fff; color:var(--navy-deep); }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; overflow:hidden; padding:64px 0 40px; }
+  .hero-panel{
+    position:absolute; top:0; right:0; bottom:0; width:38%;
+    background:var(--lime); clip-path:polygon(28% 0,100% 0,100% 100%,0% 100%);
+  }
+  .hero-panel .dotgrid{ position:absolute; inset:0; }
+  .hero-grid{
+    position:relative; display:grid; grid-template-columns:1.15fr 1fr;
+    gap:24px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.14em;
+    color:var(--navy); text-transform:uppercase; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{ content:""; width:8px; height:8px; background:var(--orange); border-radius:50%; }
+
+  .h-hiring{
+    font-family:var(--display); line-height:.88; margin:10px 0 6px;
+    font-size:clamp(48px, 9vw, 96px); letter-spacing:.01em;
+  }
+  .h-hiring .l1{ color:var(--navy); display:block; }
+  .h-hiring .l2{ color:var(--orange); display:block; }
+
+  .role-title{
+    font-family:var(--body); font-weight:700; font-size:clamp(20px,2.6vw,28px);
+    color:var(--ink); margin:14px 0 4px; max-width:480px;
+  }
+  .role-title em{ font-style:normal; color:var(--ink-soft); font-weight:500; display:block; font-size:.78em; }
+
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 26px;
+    font-family:var(--mono); font-size:12.5px; font-weight:600; letter-spacing:.03em;
+  }
+  .meta-pill{
+    border:1.5px solid var(--navy); color:var(--navy);
+    border-radius:999px; padding:7px 14px; background:#fff;
+  }
+
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-outline-navy{ background:#fff; color:var(--navy); border-color:var(--navy); }
+  .btn-outline-navy:hover{ background:var(--navy); color:#fff; }
+
+  /* ---------- exploded enclosure illustration ---------- */
+  .blueprint{ position:relative; }
+  .blueprint svg{ width:100%; height:auto; }
+  .blueprint-caption{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.06em;
+    color:var(--ink-soft); text-align:center; margin-top:6px;
+  }
+
+  /* ---------- section scaffolding ---------- */
+  section{ padding:74px 0; }
+  .section-soft{ background:var(--paper-soft); }
+  .section-head{ max-width:680px; margin-bottom:40px; }
+  .section-head h2{
+    font-family:var(--body); font-weight:800; font-size:clamp(26px,3.6vw,38px);
+    margin:8px 0 10px; color:var(--navy);
+  }
+  .section-head p{ color:var(--ink-soft); font-size:16px; margin:0; }
+  .rule{ height:1px; background:var(--line); border:0; margin:0; }
+
+  /* ---------- about ---------- */
+  .about-copy{ max-width:760px; font-size:16.5px; color:var(--ink); }
+  .about-copy strong{ color:var(--navy); }
+
+  /* ---------- responsibilities: BOM-style line items ---------- */
+  .bom{ border-top:2px solid var(--navy); }
+  .bom-row{
+    display:grid; grid-template-columns:90px 1fr; gap:22px;
+    padding:22px 0; border-bottom:1px solid var(--line);
+  }
+  .bom-item{
+    font-family:var(--mono); font-weight:700; font-size:13px; color:#fff;
+    background:var(--navy); border-radius:6px; height:32px; width:64px;
+    display:flex; align-items:center; justify-content:center; letter-spacing:.04em;
+  }
+  .bom-body h3{ margin:0 0 6px; font-size:18px; font-weight:700; color:var(--ink); }
+  .bom-body p{ margin:0; color:var(--ink-soft); font-size:15px; max-width:640px; }
+
+  /* ---------- requirements checklist ---------- */
+  .req-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px 40px; }
+  .req-item{ display:flex; gap:14px; align-items:flex-start; }
+  .req-check{ flex:none; width:26px; height:26px; margin-top:2px; }
+  .req-item h3{ margin:0 0 4px; font-size:16px; font-weight:700; color:var(--navy); }
+  .req-item p{ margin:0; font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- nice to have chips ---------- */
+  .chip-row{ display:flex; gap:18px; flex-wrap:wrap; }
+  .chip-card{
+    flex:1 1 320px; background:#fff; border:1.5px solid var(--line);
+    border-radius:14px; padding:22px; display:flex; gap:14px;
+  }
+  .chip-card svg{ flex:none; width:30px; height:30px; }
+  .chip-card p{ margin:0; font-size:14.5px; color:var(--ink); }
+
+  /* ---------- offer cards ---------- */
+  .offer-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .offer-card{
+    background:var(--navy); color:#fff; border-radius:16px; padding:28px;
+    position:relative; overflow:hidden;
+  }
+  .offer-card:nth-child(2){ background:var(--orange); }
+  .offer-card:nth-child(3){ background:var(--navy-deep); }
+  .offer-card svg{ width:34px; height:34px; margin-bottom:16px; }
+  .offer-card h3{ margin:0 0 8px; font-size:17px; font-weight:700; }
+  .offer-card p{ margin:0; font-size:14px; opacity:.88; }
+
+  /* ---------- footer CTA (poster callback) ---------- */
+  footer.cta{
+    background:var(--navy-deep); color:#fff; position:relative; overflow:hidden;
+    padding:64px 0 36px;
+  }
+  footer.cta .dotgrid{ position:absolute; inset:0; }
+  .cta-inner{ position:relative; text-align:center; }
+  .cta-inner .eyebrow{ color:var(--lime); justify-content:center; }
+  .cta-inner .eyebrow::before{ background:var(--lime); }
+  .cta-inner h2{
+    font-family:var(--display); font-size:clamp(32px,6vw,56px); margin:10px 0 6px;
+    letter-spacing:.01em;
+  }
+  .cta-inner .form-line{ font-family:var(--mono); font-size:14px; color:#cfd0ff; margin-bottom:26px; }
+  .footer-fine{
+    margin-top:44px; padding-top:22px; border-top:1px solid rgba(255,255,255,.15);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:12.5px; color:#a9aae0; font-family:var(--mono);
+  }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .btn:hover{ transform:none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    .nav-links{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-panel{ width:60%; opacity:.5; }
+    .blueprint{ max-width:340px; margin:0 auto; }
+    .req-grid{ grid-template-columns:1fr; }
+    .offer-grid{ grid-template-columns:1fr; }
+    .chip-row{ flex-direction:column; }
+    .bom-row{ grid-template-columns:64px 1fr; }
+  }
+  @media (max-width:480px){
+    .wrap{ padding:0 18px; }
+    .meta-pill{ font-size:11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+<header class="site">
+  <nav class="nav">
+    <a href="#top" class="brand">
+    <svg class="brand-mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="38" height="38" rx="10" fill="none" stroke="#100F73" stroke-width="2.4"/>
+  <!-- left leg of the M -->
+  <path d="M10 28V12" fill="none" stroke="#100F73" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- first diagonal: top-left down to the valley -->
+  <path d="M10 12l10 10" fill="none" stroke="#EB5634" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- second diagonal: valley up to top-right -->
+  <path d="M20 22l10 -10" fill="none" stroke="#5FD400" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- right leg of the M -->
+  <path d="M30 12V28" fill="none" stroke="#100F73" stroke-width="3.2" stroke-linecap="round"/>
+</svg>
+      <span class="brand-name">EMBEDDED TECHLAB<span> Aba, Abia</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About the Role</a></li>
+      <li><a href="#responsibilities">Responsibilities</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#offer">What We Offer</a></li>
+    </ul>
+    <a href="https://forms.gle/xE5LtqTepyM1Eegk6" class="btn btn-primary">Apply Now</a>
+  </nav>
+</header>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<section class="hero" id="top">
+  <div class="hero-panel"><div class="dotgrid"></div></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <p class="eyebrow">Join our team &amp; grow with us</p>
+        <h1 class="h-hiring"><span class="l1">WE ARE</span><span class="l2">HIRING!</span></h1>
+        <p class="role-title">Mechanical Design Engineer
+          <em>Electronics Enclosure &amp; Packaging</em>
+        </p>
+        <div class="meta-row">
+          <span class="meta-pill">ONSITE — ABA, ABIA STATE</span>
+          <span class="meta-pill">FULL-TIME</span>
+          <span class="meta-pill">MON–FRI · 9–5</span>
+          <span class="meta-pill"><strong>DEADLINE: June 30th</strong></span>
+        </div>
+        <div class="hero-cta">
+          <a href="https://forms.gle/xE5LtqTepyM1Eegk6" class="btn btn-primary">Apply for this role</a>
+          <a href="#about" class="btn btn-outline-navy">Read the full brief</a>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     ABOUT THE ROLE
+     ===================================================== -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">About the role</p>
+      <h2>Where industrial design meets electrical engineering</h2>
+    </div>
+    <div class="about-copy reveal">
+      <p>We are looking for a <strong>Mechanical Design Engineer</strong> with a proven track record in electronic enclosure design. In this role, you are expected to bridge the gap between industrial design and electrical engineering. You will design the physical architecture of our electronic devices, ensuring that internal components — PCBs, batteries, connectors, and displays — fit safely, look sleek, and survive real-world environments.</p>
+      <p>You will guide designs from initial concept and 3D modeling through rapid prototyping (3D printing, laser cutting) to final mass production optimization.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- =====================================================
+     KEY RESPONSIBILITIES — styled as a Bill of Materials
+     ===================================================== -->
+<section id="responsibilities" class="section-soft">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Key responsibilities</p>
+      <h2>Your bill of materials for the role</h2>
+      <p>Seven line items, one enclosure. Here's what you'll own end to end.</p>
+    </div>
+
+    <div class="bom reveal">
+      <div class="bom-row">
+        <span class="bom-item">ITEM 01</span>
+        <div class="bom-body">
+          <h3>Enclosure Design</h3>
+          <p>Create production-ready 3D CAD models of enclosures using SolidWorks or AutoCAD, balancing aesthetics, structural integrity, and ease of assembly.</p>
+        </div>
+      </div>
+      <div class="bom-row">
+        <span class="bom-item">ITEM 02</span>
+        <div class="bom-body">
+          <h3>Component Integration</h3>
+          <p>Collaborate closely with electrical engineers to import PCB layouts, connectors, and batteries into CAD systems to ensure perfect mechanical clearance and fit.</p>
+        </div>
+      </div>
+      <div class="bom-row">
+        <span class="bom-item">ITEM 03</span>
+        <div class="bom-body">
+          <h3>Prototyping &amp; Testing</h3>
+          <p>Rapidly iterate designs using in-house fabrication tools like 3D printing (FDM/SLA) and laser cutting to test form, fit, and function.</p>
+        </div>
+      </div>
+      <div class="bom-row">
+        <span class="bom-item">ITEM 04</span>
+        <div class="bom-body">
+          <h3>Thermal &amp; Mechanical Simulation</h3>
+          <p>Perform Finite Element Analysis (FEA) and thermal simulations to guarantee the enclosure protects against drops, impacts, and overheating.</p>
+        </div>
+      </div>
+      <div class="bom-row">
+        <span class="bom-item">ITEM 05</span>
+        <div class="bom-body">
+          <h3>Design for Manufacturing (DFM)</h3>
+          <p>Optimize parts for mass production processes, specifically injection molding, sheet metal fabrication, or CNC machining.</p>
+        </div>
+      </div>
+      <div class="bom-row">
+        <span class="bom-item">ITEM 06</span>
+        <div class="bom-body">
+          <h3>Environmental Protection</h3>
+          <p>Incorporate gaskets, seals, and interlocking joints to meet specific Ingress Protection (IP) ratings.</p>
+        </div>
+      </div>
+      <div class="bom-row">
+        <span class="bom-item">ITEM 07</span>
+        <div class="bom-body">
+          <h3>Documentation</h3>
+          <p>Create detailed 2D engineering drawings with precise tolerances, bill of materials (BOM), and assembly instructions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     REQUIRED SKILLS & QUALIFICATIONS
+     ===================================================== -->
+<section id="requirements">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Required skills &amp; qualifications</p>
+      <h2>What you'll bring to the bench</h2>
+    </div>
+
+    <div class="req-grid reveal">
+      <div class="req-item">
+        <svg class="req-check" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="none" stroke="#5FD400" stroke-width="2"/><path d="M7 13l4 4 8-9" fill="none" stroke="#5FD400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Education</h3>
+          <p>Bachelor's degree in Mechanical Engineering, Product Design Engineering, or a related field.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <svg class="req-check" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="none" stroke="#5FD400" stroke-width="2"/><path d="M7 13l4 4 8-9" fill="none" stroke="#5FD400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Software Expertise</h3>
+          <p>Advanced proficiency in SolidWorks (highly preferred) or AutoCAD, including sheet metal, plastics, and surfacing features.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <svg class="req-check" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="none" stroke="#5FD400" stroke-width="2"/><path d="M7 13l4 4 8-9" fill="none" stroke="#5FD400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Electronics Packaging Experience</h3>
+          <p>Demonstrated experience designing enclosures for PCBs, managing tolerance stack-ups, and integrating hardware components.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <svg class="req-check" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="none" stroke="#5FD400" stroke-width="2"/><path d="M7 13l4 4 8-9" fill="none" stroke="#5FD400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Prototyping Skills</h3>
+          <p>Hands-on experience operating and troubleshooting 3D printers and laser cutters.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <svg class="req-check" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="none" stroke="#5FD400" stroke-width="2"/><path d="M7 13l4 4 8-9" fill="none" stroke="#5FD400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Manufacturing Knowledge</h3>
+          <p>Strong understanding of DFM/DFA rules, draft angles, wall thickness constraints, and material selection (ABS, Polycarbonate, Aluminum, etc.).</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <svg class="req-check" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="none" stroke="#5FD400" stroke-width="2"/><path d="M7 13l4 4 8-9" fill="none" stroke="#5FD400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Problem-Solving</h3>
+          <p>Ability to optimize designs for specific environmental constraints.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- =====================================================
+     NICE TO HAVE
+     ===================================================== -->
+<section class="section-soft">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Nice to have</p>
+      <h2>Bonus points</h2>
+    </div>
+    <div class="chip-row reveal">
+      <div class="chip-card">
+        <svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="14" fill="none" stroke="#EB5634" stroke-width="2"/><path d="M9 18c2-5 10-5 12 0M12 12h.01M18 12h.01" stroke="#EB5634" stroke-width="2" stroke-linecap="round"/></svg>
+        <p>Experience with industrial design, ergonomics, and consumer tech aesthetic trends.</p>
+      </div>
+      <div class="chip-card">
+        <svg viewBox="0 0 30 30"><path d="M5 22l6-14 4 9 3-6 7 11" fill="none" stroke="#EB5634" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>Experience simulating drop tests and airflow using SolidWorks Simulation / Flow Simulation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     WHAT WE OFFER
+     ===================================================== -->
+<section id="offer">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">What we offer</p>
+      <h2>Built around stable, focused work</h2>
+    </div>
+    <div class="offer-grid reveal">
+      <div class="offer-card">
+        <svg viewBox="0 0 30 30" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="6" width="22" height="19" rx="2"/><line x1="4" y1="12" x2="26" y2="12"/><line x1="9" y1="3" x2="9" y2="9"/><line x1="21" y1="3" x2="21" y2="9"/></svg>
+        <h3>Mon–Fri, 9–5</h3>
+        <p>Structured, stable work hours — no late-night fire drills as standard practice.</p>
+      </div>
+      <div class="offer-card">
+        <svg viewBox="0 0 30 30" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="4"/><circle cx="21" cy="11" r="4"/><path d="M4 25c0-4 3-7 7-7s7 3 7 7M16 25c0-4 3-7 7-7"/></svg>
+        <h3>Hospitable team</h3>
+        <p>A welcoming, collaborative culture where engineers actually talk to each other.</p>
+      </div>
+      <div class="offer-card">
+        <svg viewBox="0 0 30 30" fill="none" stroke="#fff" stroke-width="2"><path d="M4 22l8-9 5 5 9-11"/><path d="M18 6h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Room to grow</h3>
+        <p>Rapid career growth and skill acquisition as the team and product line up scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FOOTER / APPLY CTA — poster callback
+     ===================================================== -->
+<footer class="cta" id="apply">
+  <div class="dotgrid on-dark"></div>
+  <div class="wrap cta-inner">
+    <h2>Fill this form:</h2>
+ 
+    <a href="https://forms.gle/xE5LtqTepyM1Eegk6" class="btn btn-ghost-light">Open Application Form →</a>
+
+    <div class="footer-fine">
+      <span>EMBEDDED TECHLAB</span>
+      <span>ONSITE · ABA, ABIA STATE · FULL-TIME</span>
+      <span>© 2026 Embedded TechLab</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Lightweight scroll-reveal, respects prefers-reduced-motion via CSS above.
+  if ('IntersectionObserver' in window){
+    var targets = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(t){ io.observe(t); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(t){ t.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
